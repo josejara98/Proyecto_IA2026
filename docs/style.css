@@ -73,7 +73,7 @@ th,td{padding:.5rem .7rem;border-bottom:1px solid var(--line)}
 th{background:var(--soft)}
 @media(max-width:430px){.analysis-counts{grid-template-columns:1fr}}
 
-.project-title{font-size:clamp(2rem,4vw,3.65rem);line-height:1.09}
+.project-title{font-size:clamp(1.6rem,3vw,2.65rem);line-height:1.15}
 .blocks{list-style:none;margin:1rem 0 0;padding:0}
 .blocks li{position:relative;padding:.4rem .6rem;margin-bottom:1.05rem;background:var(--soft);border:1px solid var(--line);border-radius:.35rem;text-align:center}
 .blocks li:not(:last-child)::after{content:"↓";position:absolute;line-height:1;left:50%;top:calc(100% + 1px);color:var(--green)}
@@ -82,3 +82,10 @@ th{background:var(--soft)}
 
 .choices[hidden]{display:none}
 #game-summary{margin-top:1.25rem}
+
+.cover-slides{overflow:hidden;border-radius:.85rem;background:var(--ink)}
+.cover-slides img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.cover-slides img[hidden],.cover-controls[hidden]{display:none}
+.cover-controls{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.65rem}
+.cover-controls button{padding:.28rem .65rem;background:var(--paper);color:var(--green);font-size:.9rem}
+.cover-controls output{font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted)}
