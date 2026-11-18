@@ -1,12 +1,9 @@
 # Datos del proyecto
 
-El dataset propio se organiza en Roboflow y contiene imágenes de frutillas
-etiquetadas en tres estados de madurez: no maduro, semimaduro y maduro.
+Las imágenes propias y sus anotaciones de madurez se gestionan en Roboflow.
+Las imágenes externas se incorporarán solo al entrenamiento de `modelo2`,
+si sus etiquetas son compatibles con las tres clases del proyecto.
 
-- **modelo1** — Usará imágenes propias para el entrenamiento.
-- **modelo2** — Usará las mismas imágenes propias de entrenamiento más imágenes
-  de fuentes externas con etiquetas compatibles.
-
-Ambos modelos se evaluarán con los mismos conjuntos de validación y prueba,
-formados por imágenes propias. Los fotogramas de cada video se mantendrán
-en una sola partición.
+Ambos modelos usarán los mismos conjuntos de validación y prueba,
+compuestos por imágenes propias. Todos los fotogramas de un mismo video
+se asignarán a una sola partición.
