@@ -93,6 +93,10 @@ tbody th,tbody td{background:white}
 .metric-figure{max-width:760px;margin:1.25rem 0}
 .metric-figure img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:0}
 
-.evaluation-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.25rem 0}
-.evaluation-charts .metric-figure{min-width:0;margin:0}
-@media(max-width:810px){.evaluation-charts{grid-template-columns:1fr}}
+
+.evaluation-carousel{margin:1.25rem 0}
+.evaluation-carousel .metric-figure{margin:0;max-width:none}
+[data-slide][hidden],.slide-controls[hidden]{display:none}
+.slide-controls{display:flex;align-items:center;justify-content:center;gap:.85rem;margin-top:.6rem}
+.slide-controls button{font:700 1.4rem/1 system-ui;padding:.28rem .65rem;background:var(--paper);color:var(--green)}
+.slide-controls span{font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted)}

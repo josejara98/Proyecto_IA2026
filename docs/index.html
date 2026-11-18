@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Sistema YOLO11n para detectar frutillas y clasificar su estado de madurez.">
 <title>StrawbEye · IA 2026</title>
-<link rel="stylesheet" href="style.css?v=rotacion-2s">
+<link rel="stylesheet" href="style.css?v=flechas">
 <script defer src="rondas.js"></script>
 <script defer src="juego.js"></script>
-<script defer src="portada.js?v=rotacion-2s"></script>
+<script defer src="portada.js?v=flechas"></script>
 <script type="module" src="inferencia.js"></script>
 </head>
 <body>
@@ -18,11 +18,16 @@
 <div><p class="kicker">FIUNA / Inteligencia Artificial 2026</p><h1 class="project-title">Desarrollo y evaluación de un sistema de visión artificial para la detección de frutillas y la clasificación de sus estados de madurez</h1>
 <p class="intro">Proyecto de INTELIGENCIA ARTIFICIAL elaborado por estudiantes de FIUNA. El sistema procesa imágenes del cultivo desde la perspectiva de un robot móvil para identificar los frutos y su estado de madurez.</p>
 <div class="actions"><a class="button" href="#analisis">Analizar una imagen</a><a class="button outline" href="https://github.com/josejara98/Proyecto_IA2026">Ver repositorio ↗</a></div></div>
-<section class="cover-carousel" aria-label="Ejemplos de detección con YOLO11n">
+<section class="cover-carousel" data-carousel aria-label="Ejemplos de detección con YOLO11n">
 <div class="cover-slides">
-<img src="assets/portada-ajustada-1.webp" alt="Imagen 1 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364">
-<img src="assets/portada-ajustada-2.webp" alt="Imagen 2 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364" hidden>
-<img src="assets/portada-ajustada-3.webp" alt="Imagen 3 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364" hidden>
+<img data-slide src="assets/portada-ajustada-1.webp" alt="Imagen 1 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364">
+<img data-slide src="assets/portada-ajustada-2.webp" alt="Imagen 2 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364" hidden>
+<img data-slide src="assets/portada-ajustada-3.webp" alt="Imagen 3 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="364" hidden>
+</div>
+<div class="slide-controls" hidden>
+<button type="button" data-slide-step="-1" aria-label="Anterior">‹</button>
+<span data-slide-position aria-live="polite">1 / 3</span>
+<button type="button" data-slide-step="1" aria-label="Siguiente">›</button>
 </div>
 </section></div></section>
 <section class="wrap section" id="proyecto">
@@ -61,15 +66,24 @@
 <section class="wrap section" id="evaluacion">
 <h2>Evaluación</h2>
 <p>Los detectores se evaluaron con precisión, recall y mAP. La regresión logística se evaluó con exactitud y F1 macro sobre recortes anotados.</p>
-<div class="evaluation-charts">
-<figure class="panel metric-figure">
-<img loading="lazy" src="assets/metricas-yolo11n.svg" alt="YOLO11n en validación V4: precisión 87,3 %, recall 87,0 %, mAP50 91,4 % y mAP50–95 78,2 %.">
-<figcaption>Métricas principales de YOLO11n en validación V4.</figcaption>
+<div class="panel evaluation-carousel" id="curvas-aprendizaje" data-carousel role="region" aria-label="Gráficas originales de evaluación">
+<figure class="metric-figure" data-slide>
+<a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/e82c0f5e41e3a11e810475e3af65bdb35e0da994/results/plots/modelo2/results.png" aria-label="Abrir gráfica completa: YOLO11n · Curvas de entrenamiento y validación"><img src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/e82c0f5e41e3a11e810475e3af65bdb35e0da994/results/plots/modelo2/results.png" alt="YOLO11n · Curvas de entrenamiento y validación" loading="lazy"></a>
+<figcaption>YOLO11n · Curvas de entrenamiento y validación</figcaption>
 </figure>
-<figure class="panel metric-figure" id="curvas-aprendizaje">
-<img loading="lazy" src="assets/curvas-aprendizaje.svg" alt="Evolución de mAP50–95 por época para YOLO11s y YOLO11n.">
-<figcaption>mAP50–95 por época. Cada detector se evaluó con su propio conjunto de validación.</figcaption>
+<figure class="metric-figure" data-slide hidden>
+<a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/e82c0f5e41e3a11e810475e3af65bdb35e0da994/results/plots/modelo1/results.png" aria-label="Abrir gráfica completa: YOLO11s · Curvas de entrenamiento y validación"><img src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/e82c0f5e41e3a11e810475e3af65bdb35e0da994/results/plots/modelo1/results.png" alt="YOLO11s · Curvas de entrenamiento y validación" loading="lazy"></a>
+<figcaption>YOLO11s · Curvas de entrenamiento y validación</figcaption>
 </figure>
+<figure class="metric-figure" data-slide hidden>
+<a href="assets/precision-recall.png" aria-label="Abrir gráfica completa: YOLO11n · Curva precisión–recall por clase"><img src="assets/precision-recall.png" alt="YOLO11n · Curva precisión–recall por clase" loading="lazy"></a>
+<figcaption>YOLO11n · Curva precisión–recall por clase</figcaption>
+</figure>
+<div class="slide-controls" hidden>
+<button type="button" data-slide-step="-1" aria-label="Anterior">‹</button>
+<span data-slide-position aria-live="polite">1 / 3</span>
+<button type="button" data-slide-step="1" aria-label="Siguiente">›</button>
+</div>
 </div>
 <div class="table-scroll"><table><caption>Detección de objetos</caption><thead><tr><th>Detector</th><th>Conjunto</th><th>Precisión</th><th>Recall</th><th>mAP50</th><th>mAP50–95</th></tr></thead><tbody>
 <tr><th scope="row">YOLO11s</th><td>Validación V3</td><td>80,3 %</td><td>79,8 %</td><td>85,5 %</td><td>55,2 %</td></tr>
