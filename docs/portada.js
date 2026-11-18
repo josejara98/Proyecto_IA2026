@@ -6,8 +6,8 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let currentSlide = 0;
 
 setInterval(() => {
-  if (reduceMotion.matches || document.hidden || cover.matches(':hover')) return;
+  if (reduceMotion.matches || document.hidden) return;
   slides[currentSlide].hidden = true;
   currentSlide = (currentSlide + 1) % slides.length;
   slides[currentSlide].hidden = false;
-}, 5500);
+}, 2000);
