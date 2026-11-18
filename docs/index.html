@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Sistema YOLO11n para detectar frutillas y clasificar su estado de madurez.">
 <title>StrawbEye · IA 2026</title>
-<link rel="stylesheet" href="style.css?v=portada-ajustada">
+<link rel="stylesheet" href="style.css?v=rotacion-2s">
 <script defer src="rondas.js"></script>
 <script defer src="juego.js"></script>
-<script defer src="portada.js?v=portada-ajustada"></script>
+<script defer src="portada.js?v=rotacion-2s"></script>
 <script type="module" src="inferencia.js"></script>
 </head>
 <body>
@@ -56,18 +56,21 @@
 <h2>Entrenamiento y curvas de aprendizaje</h2>
 <p>Ambos detectores se entrenaron en Google Colab con GPU NVIDIA Tesla T4, imágenes de 640 × 640, lotes de 16, optimizador AdamW, tasa inicial de 0,001 y decaimiento de pesos de 0,0005. Se programaron hasta 100 épocas con una paciencia de 20. YOLO11s completó 38 épocas y obtuvo sus mejores pesos en la 18. YOLO11n completó 61 y obtuvo sus mejores pesos en la 41.</p>
 <p>La búsqueda en grilla de la regresión logística evaluó cuatro valores de regularización y ponderación de clases. La configuración seleccionada usó <code>C=1</code> y <code>class_weight=balanced</code>; el F1 macro en validación pasó de 0,5735 a 0,6767.</p>
-<figure class="panel metric-figure">
-<img loading="lazy" src="assets/curvas-aprendizaje.svg" alt="Evolución de mAP50–95 por época para YOLO11s y YOLO11n.">
-<figcaption>mAP50–95 por época. Cada detector se evaluó con su propio conjunto de validación.</figcaption>
-</figure>
+<p><a href="#curvas-aprendizaje">Ver las curvas de aprendizaje</a></p>
 </div></section>
 <section class="wrap section" id="evaluacion">
 <h2>Evaluación</h2>
 <p>Los detectores se evaluaron con precisión, recall y mAP. La regresión logística se evaluó con exactitud y F1 macro sobre recortes anotados.</p>
+<div class="evaluation-charts">
 <figure class="panel metric-figure">
 <img loading="lazy" src="assets/metricas-yolo11n.svg" alt="YOLO11n en validación V4: precisión 87,3 %, recall 87,0 %, mAP50 91,4 % y mAP50–95 78,2 %.">
 <figcaption>Métricas principales de YOLO11n en validación V4.</figcaption>
 </figure>
+<figure class="panel metric-figure" id="curvas-aprendizaje">
+<img loading="lazy" src="assets/curvas-aprendizaje.svg" alt="Evolución de mAP50–95 por época para YOLO11s y YOLO11n.">
+<figcaption>mAP50–95 por época. Cada detector se evaluó con su propio conjunto de validación.</figcaption>
+</figure>
+</div>
 <div class="table-scroll"><table><caption>Detección de objetos</caption><thead><tr><th>Detector</th><th>Conjunto</th><th>Precisión</th><th>Recall</th><th>mAP50</th><th>mAP50–95</th></tr></thead><tbody>
 <tr><th scope="row">YOLO11s</th><td>Validación V3</td><td>80,3 %</td><td>79,8 %</td><td>85,5 %</td><td>55,2 %</td></tr>
 <tr><th scope="row">YOLO11n</th><td>Validación V4</td><td>87,3 %</td><td>87,0 %</td><td>91,4 %</td><td>78,2 %</td></tr>
