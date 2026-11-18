@@ -1,4 +1,4 @@
-# Detección y clasificación de madurez de frutillas
+# Desarrollo y evaluación de un sistema de visión artificial para la detección de frutillas y la clasificación de sus estados de madurez
 
 Proyecto de la asignatura Inteligencia Artificial 2026. El objetivo es detectar frutillas en imágenes y clasificarlas en tres estados de madurez: no maduro, semimaduro y maduro.
 
