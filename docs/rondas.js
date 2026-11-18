@@ -1,4 +1,4 @@
-const rondas = [
+export const rondas = [
   {
     "image": "ronda-1.jpg",
     "source": "data/modelo1/test/images/1000729781_frame_113_jpg.rf.69d1ae0fc095fbf53ff0ae828ef1108a.jpg",
@@ -8,9 +8,7 @@ const rondas = [
       0.870313,
       0.759375
     ],
-    "reference": 0,
-    "prediction": 0,
-    "confidence": 0.874
+    "reference": 0
   },
   {
     "image": "ronda-2.jpg",
@@ -21,9 +19,7 @@ const rondas = [
       0.61875,
       0.649219
     ],
-    "reference": 1,
-    "prediction": 1,
-    "confidence": 0.852
+    "reference": 1
   },
   {
     "image": "ronda-3.jpg",
@@ -34,9 +30,7 @@ const rondas = [
       0.746875,
       0.514062
     ],
-    "reference": 2,
-    "prediction": 2,
-    "confidence": 0.831
+    "reference": 2
   },
   {
     "image": "ronda-4-reemplazo.jpg",
@@ -47,9 +41,7 @@ const rondas = [
       0.841406,
       0.496094
     ],
-    "reference": 0,
-    "prediction": 0,
-    "confidence": 0.701
+    "reference": 0
   },
   {
     "image": "ronda-5.jpg",
@@ -60,9 +52,7 @@ const rondas = [
       0.714063,
       0.728125
     ],
-    "reference": 1,
-    "prediction": 1,
-    "confidence": 0.847
+    "reference": 1
   },
   {
     "image": "ronda-6-reemplazo.jpg",
@@ -73,9 +63,7 @@ const rondas = [
       0.432812,
       0.689063
     ],
-    "reference": 2,
-    "prediction": 2,
-    "confidence": 0.804
+    "reference": 2
   },
   {
     "image": "ronda-7.jpg",
@@ -86,9 +74,7 @@ const rondas = [
       0.628906,
       0.601562
     ],
-    "reference": 0,
-    "prediction": 0,
-    "confidence": 0.89
+    "reference": 0
   },
   {
     "image": "ronda-8.jpg",
@@ -99,9 +85,7 @@ const rondas = [
       0.526563,
       0.363281
     ],
-    "reference": 1,
-    "prediction": 1,
-    "confidence": 0.873
+    "reference": 1
   },
   {
     "image": "ronda-9.jpg",
@@ -112,8 +96,6 @@ const rondas = [
       0.542969,
       0.863281
     ],
-    "reference": 2,
-    "prediction": 2,
-    "confidence": 0.774
+    "reference": 2
   }
 ];

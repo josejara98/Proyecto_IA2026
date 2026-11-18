@@ -15,7 +15,16 @@ const results = document.querySelector('#analysis-results');
 const counts = document.querySelector('#analysis-counts');
 const rows = document.querySelector('#analysis-rows');
 const percent = new Intl.NumberFormat('es-PY', {style: 'percent', maximumFractionDigits: 1});
-let engine;
+let enginePromise;
+let pendingInference = Promise.resolve();
+
+export function prepareModel() {
+  enginePromise ??= loadModel().catch(error => {
+    enginePromise = undefined;
+    throw error;
+  });
+  return enginePromise;
+}
 
 async function loadModel() {
   const ort = await import(runtimeBase + 'ort.wasm.min.mjs');
@@ -57,7 +66,7 @@ function preprocess(image, ort) {
   return {tensor: new ort.Tensor('float32', data, [1, 3, size, size]), scale, left, top};
 }
 
-function iou(a, b) {
+export function iou(a, b) {
   const intersection = Math.max(0, Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1))
     * Math.max(0, Math.min(a.y2, b.y2) - Math.max(a.y1, b.y1));
   return intersection / ((a.x2-a.x1)*(a.y2-a.y1) + (b.x2-b.x1)*(b.y2-b.y1) - intersection);
@@ -96,6 +105,17 @@ function detectionsFrom(output, transform, image) {
     y1: clip((box.y1 - transform.top) / transform.scale, image.height),
     y2: clip((box.y2 - transform.top) / transform.scale, image.height)
   })).filter(box => box.x2 > box.x1 && box.y2 > box.y1);
+}
+
+export function detect(image) {
+  const inference = pendingInference.then(async () => {
+    const {ort, session} = await prepareModel();
+    const transform = preprocess(image, ort);
+    const output = await session.run({[session.inputNames[0]]: transform.tensor});
+    return detectionsFrom(output[session.outputNames[0]], transform, image);
+  });
+  pendingInference = inference.catch(() => {});
+  return inference;
 }
 
 function showResults(image, detections) {
@@ -167,14 +187,10 @@ form.addEventListener('submit', async event => {
       status.textContent = 'No se pudo abrir la imagen. Seleccione un archivo JPG, PNG o WebP válido.';
       return;
     }
-    if (!engine) {
-      status.textContent = 'Cargando el modelo…';
-      engine = await loadModel();
-    }
+    status.textContent = 'Cargando el modelo…';
+    await prepareModel();
     status.textContent = 'Ejecutando la detección…';
-    const transform = preprocess(image, engine.ort);
-    const output = await engine.session.run({[engine.session.inputNames[0]]: transform.tensor});
-    showResults(image, detectionsFrom(output[engine.session.outputNames[0]], transform, image));
+    showResults(image, await detect(image));
   } catch (error) {
     console.error(error);
     status.textContent = 'No se pudo ejecutar el modelo. Verifique la conexión y vuelva a intentarlo.';

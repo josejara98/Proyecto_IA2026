@@ -1,4 +1,5 @@
-'use strict';
+import {detect, iou} from './inferencia.js?v=modelo-en-juego';
+import {rondas} from './rondas.js?v=modelo-en-juego';
 
 const classes = ['Maduro', 'No maduro', 'Semimaduro'];
 const elements = Object.fromEntries(
@@ -61,16 +62,55 @@ function updateScore(count) {
     + ' · Aciertos del modelo ' + modelScore + '/' + count;
 }
 
-function answer(round, choice, selected) {
+async function predictMarkedFruit(round) {
+  await elements.fruit.decode();
+  const image = await createImageBitmap(elements.fruit);
+  try {
+    const [x1, y1, x2, y2] = round.box;
+    const target = {
+      x1: x1 * image.width,
+      y1: y1 * image.height,
+      x2: x2 * image.width,
+      y2: y2 * image.height
+    };
+    let best;
+    let bestOverlap = 0;
+    for (const detection of await detect(image)) {
+      const overlap = iou(target, detection);
+      if (overlap >= 0.50 && overlap > bestOverlap) {
+        best = detection;
+        bestOverlap = overlap;
+      }
+    }
+    return best;
+  } finally {
+    image.close();
+  }
+}
+
+async function answer(round, choice, selected) {
   if (answered) return;
   answered = true;
   selected.setAttribute('aria-pressed', 'true');
   for (const button of elements.choices.children) button.disabled = true;
+  elements.feedback.textContent = 'Ejecutando YOLO11n… La primera ronda puede tardar mientras se descarga el modelo.';
+  let detection;
+  try {
+    detection = await predictMarkedFruit(round);
+  } catch (error) {
+    console.error(error);
+    elements.feedback.textContent = 'No se pudo ejecutar el modelo. Verifique la conexión y seleccione su respuesta para reintentar.';
+    answered = false;
+    selected.setAttribute('aria-pressed', 'false');
+    for (const button of elements.choices.children) button.disabled = false;
+    selected.focus();
+    return;
+  }
   playerScore += Number(choice === round.reference);
-  modelScore += Number(round.prediction === round.reference);
-  const prediction = round.prediction === null
-    ? 'Sin detección correspondiente'
-    : classes[round.prediction] + ' · ' + confidenceFormat.format(round.confidence) + ' de confianza';
+  modelScore += Number(detection?.category === round.reference);
+  const prediction = detection
+    ? classes[detection.category] + ' · ' + confidenceFormat.format(detection.confidence) + ' de confianza'
+    : 'Sin detección que coincida con el fruto marcado';
   const details = document.createElement('p');
   details.append(
     'Respuesta seleccionada: ' + classes[choice], document.createElement('br'),
