@@ -65,17 +65,17 @@ const rondas = [
     "confidence": 0.847
   },
   {
-    "image": "ronda-6.jpg",
-    "source": "data/modelo1/test/images/1000450914_frame_054_jpg.rf.231054eb3921e928465b41fdd4f5b1e0.jpg",
+    "image": "ronda-6-reemplazo.jpg",
+    "source": "data/modelo1/test/images/1000729780_frame_045_jpg.rf.43090c6d94ddd1e2190cff9465f15441.jpg",
     "box": [
-      0.584375,
-      0.424219,
-      0.63125,
-      0.475781
+      0.395313,
+      0.651562,
+      0.432812,
+      0.689063
     ],
     "reference": 2,
-    "prediction": 0,
-    "confidence": 0.869
+    "prediction": 2,
+    "confidence": 0.804
   },
   {
     "image": "ronda-7.jpg",

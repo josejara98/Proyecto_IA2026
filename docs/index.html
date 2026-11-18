@@ -6,7 +6,7 @@
 <meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Sistema YOLO11n para detectar frutillas y clasificar su estado de madurez.">
 <title>StrawbEye · IA 2026</title>
 <link rel="stylesheet" href="style.css?v=flechas">
-<script defer src="rondas.js"></script>
+<script defer src="rondas.js?v=rondas-verificadas"></script>
 <script defer src="juego.js"></script>
 <script defer src="portada.js?v=flechas"></script>
 <script type="module" src="inferencia.js"></script>
@@ -60,7 +60,6 @@
 <section class="demo"><div class="wrap section" id="entrenamiento">
 <h2>Entrenamiento y curvas de aprendizaje</h2>
 <p>Ambos detectores se entrenaron en Google Colab con GPU NVIDIA Tesla T4, imágenes de 640 × 640, lotes de 16, optimizador AdamW, tasa inicial de 0,001 y decaimiento de pesos de 0,0005. Se programaron hasta 100 épocas con una paciencia de 20. YOLO11s completó 38 épocas y obtuvo sus mejores pesos en la 18. YOLO11n completó 61 y obtuvo sus mejores pesos en la 41.</p>
-<p>La búsqueda en grilla de la regresión logística evaluó cuatro valores de regularización y ponderación de clases. La configuración seleccionada usó <code>C=1</code> y <code>class_weight=balanced</code>; el F1 macro en validación pasó de 0,5735 a 0,6767.</p>
 <p><a href="#curvas-aprendizaje">Ver las curvas de aprendizaje</a></p>
 </div></section>
 <section class="wrap section" id="evaluacion">
@@ -92,7 +91,6 @@
 <tr><th scope="row">YOLO11n</th><td>Prueba V3 (exploratoria)</td><td>74,3 %</td><td>79,5 %</td><td>80,0 %</td><td>51,0 %</td></tr>
 </tbody></table></div>
 <p>La regresión logística optimizada alcanzó 85,57 % de exactitud y 67,67 % de F1 macro en validación.</p>
-<p class="note">La prueba V3 contiene 43 imágenes y 187 frutos anotados. Como V4 incorpora datos propios de V3, la evaluación de YOLO11n en esas imágenes es exploratoria y puede incluir muestras relacionadas con su entrenamiento. Las métricas de la partición de prueba de V4 y de la regresión logística se encuentran pendientes.</p>
 <p><a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/results">Ver los resultados del repositorio ↗</a></p>
 </section>
 <section class="wrap section" id="analisis">
