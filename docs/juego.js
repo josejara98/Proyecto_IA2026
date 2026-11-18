@@ -93,7 +93,6 @@ async function answer(round, choice, selected) {
   answered = true;
   selected.setAttribute('aria-pressed', 'true');
   for (const button of elements.choices.children) button.disabled = true;
-  elements['game-restart'].disabled = true;
   elements.feedback.textContent = 'Ejecutando YOLO11n… La primera ronda puede tardar mientras se descarga el modelo.';
   let detection;
   try {
@@ -106,8 +105,6 @@ async function answer(round, choice, selected) {
     for (const button of elements.choices.children) button.disabled = false;
     selected.focus();
     return;
-  } finally {
-    elements['game-restart'].disabled = false;
   }
   playerScore += Number(choice === round.reference);
   modelScore += Number(detection?.category === round.reference);
