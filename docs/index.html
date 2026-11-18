@@ -3,30 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Detectá frutillas y compará tus respuestas con YOLO11n.">
-<title>Frutillas en campo · IA 2026</title>
+<meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Sistema YOLO11n para detectar frutillas y clasificar su estado de madurez.">
+<title>StrawbEye · IA 2026</title>
 <link rel="stylesheet" href="style.css">
 <script defer src="rondas.js"></script>
 <script defer src="juego.js"></script>
+<script type="module" src="inferencia.js"></script>
 </head>
 <body>
-<header class="wrap top"><a class="brand" href="#">Frutillas en campo</a><nav aria-label="Principal"><a href="#proyecto">Proyecto</a><a href="#demo">Minijuego</a><a href="#equipo">Equipo</a><a href="#contacto">Contacto</a></nav></header>
+<header class="wrap top"><a class="brand" href="#">StrawbEye</a><nav aria-label="Principal"><a href="#proyecto">Proyecto</a><a href="#modelos">Modelos</a><a href="#evaluacion">Evaluación</a><a href="#analisis">Analizar una imagen</a><a href="#demo">Comparación</a><a href="#equipo">Equipo</a><a href="#contacto">Contacto</a></nav></header>
 <main>
 <section class="hero"><div class="wrap hero-grid">
-<div><p class="kicker">FIUNA / Inteligencia Artificial 2026</p><h1>Detectar frutillas.<br>Reconocer su madurez.</h1>
-<p class="intro">Somos José Jara y Larissa Ruiz, estudiantes de Ingeniería Mecatrónica. Aplicamos visión artificial a un robot móvil para monitorear el cultivo de frutillas.</p>
-<div class="actions"><a class="button" href="#demo">Probar el minijuego</a><a class="button outline" href="https://github.com/josejara98/Proyecto_IA2026">Ver repositorio ↗</a></div></div>
+<div><p class="kicker">FIUNA / Inteligencia Artificial 2026</p><h1 class="project-title">Desarrollo y evaluación de un sistema de visión artificial para la detección de frutillas y la clasificación de sus estados de madurez</h1>
+<p class="intro">Proyecto de José Jara y Larissa Ruiz, estudiantes de Ingeniería Mecatrónica. El sistema procesa imágenes del cultivo desde la perspectiva de un robot móvil para identificar los frutos y su estado de madurez.</p>
+<div class="actions"><a class="button" href="#analisis">Analizar una imagen</a><a class="button outline" href="https://github.com/josejara98/Proyecto_IA2026">Ver repositorio ↗</a></div></div>
 <figure><img src="assets/campo.jpg" alt="Frutillas en una imagen real del cultivo" width="720" height="540"><figcaption>Imagen del dataset de campo</figcaption></figure></div></section>
-<section class="wrap section" id="proyecto"><p class="kicker">Proyecto de Inteligencia Artificial</p><h2>Visión artificial para monitorear el cultivo</h2><p class="intro">El sistema localiza frutillas en imágenes tomadas desde la perspectiva del robot y reconoce tres estados de madurez. Esto permite registrar cómo se distribuyen los frutos visibles durante un recorrido.</p>
-<div class="grid"><article class="panel"><h3>Dataset</h3><p>Frutilla V4 v1 reúne 7.927 imágenes RGB propias y de fuentes externas. Las anotaciones indican la ubicación y el estado de cada fruto. La exportación de Roboflow usa imágenes de 640 × 640 píxeles con relleno para conservar la proporción.</p><a href="https://universe.roboflow.com/larissas-workspace-3bnvn/frutilla_v4-r9rhk/dataset/1">Ver dataset en Roboflow ↗</a></article>
-<article class="panel"><h3>Modelo 2 · YOLO11n</h3><p>El detector devuelve una caja, una clase y una confianza por fruto. Se entrenó con AdamW, tasa inicial de 0,001, lotes de 16 y detención temprana. El mejor checkpoint se obtuvo en la época 41.</p><a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/models">Ver pesos y configuración ↗</a></article>
-<article class="panel"><h3>Características y optimización</h3><p>Para el clasificador auxiliar se extrajeron tres características HSV de cada recorte: proporción roja, proporción verde y saturación media. La búsqueda en grilla evaluó la regularización y el balanceo de clases en la regresión logística.</p><a href="https://github.com/josejara98/Proyecto_IA2026/blob/main/notebooks/03_optimizacion.ipynb">Ver optimización ↗</a></article></div>
-<div class="results"><div><h3>Resultados del Modelo 2</h3><p>Métricas globales sobre la partición de validación de Frutilla V4 v1.</p><dl class="metrics"><div><dt>mAP50</dt><dd>91,4 %</dd></div><div><dt>mAP50–95</dt><dd>78,2 %</dd></div><div><dt>Precisión</dt><dd>87,3 %</dd></div><div><dt>Recall</dt><dd>87,0 %</dd></div></dl><a href="https://github.com/josejara98/Proyecto_IA2026/blob/main/results/metricas.csv">Consultar resultados completos ↗</a></div><a class="chart" href="assets/precision-recall.png"><img src="assets/precision-recall.png" loading="lazy" alt="Curva precisión–recall del Modelo 2 por clase. La AP50 de maduro es 0,906, de no maduro 0,927 y de semimaduro 0,910."></a></div>
+<section class="wrap section" id="proyecto">
+<p class="kicker">Proyecto de Inteligencia Artificial</p>
+<h2>Objetivos y alcance</h2>
+<p class="intro">El objetivo es desarrollar y evaluar un sistema que localice frutillas visibles en imágenes de campo y clasifique su estado de madurez. La detección permite obtener un conteo por estado en cada imagen como parte del monitoreo del cultivo con un robot móvil.</p>
+<ul><li>Preparar y auditar imágenes RGB con cajas delimitadoras en formato YOLO.</li><li>Evaluar dos detectores de objetos y un clasificador de referencia basado en color.</li><li>Implementar el detector YOLO11n en una aplicación web que procese imágenes del cultivo.</li></ul>
 </section>
-<section id="demo" class="demo"><div class="wrap section"><p class="kicker">Demostración interactiva</p><h2>Tu criterio frente al Modelo 2</h2><p class="intro">Observá la frutilla marcada y elegí su estado. Luego verás tu respuesta, la anotación del dataset y lo que detectó YOLO11n en la imagen completa.</p>
+<section class="demo"><div class="wrap section" id="dataset">
+<h2>Estructura del dataset</h2>
+<p>Frutilla V3 v8 contiene fotografías y fotogramas propios. Frutilla V4 v1 combina material propio e imágenes externas de repositorios abiertos. Las etiquetas se homologaron a tres estados: maduro, no maduro y semimaduro.</p>
+<div class="panel table-scroll"><table><caption>Imágenes por partición</caption><thead><tr><th>Dataset</th><th>Entrenamiento</th><th>Validación</th><th>Prueba</th><th>Total</th></tr></thead><tbody>
+<tr><th scope="row">Frutilla V3 v8</th><td>1.500</td><td>215</td><td>43</td><td>1.758</td></tr>
+<tr><th scope="row">Frutilla V4 v1</th><td>6.769</td><td>1.042</td><td>116</td><td>7.927</td></tr>
+</tbody></table></div>
+<div class="team"><article class="panel"><h3>Distribución y balanceo</h3><p>En el entrenamiento de Frutilla V4 v1 se registraron 4.722 anotaciones de frutos maduros, 26.626 de no maduros y 6.100 de semimaduros. La clase no madura representa el 71,1 %. En la regresión logística se evaluó la ponderación de clases para compensar el desbalance.</p></article>
+<article class="panel"><h3>Procesamiento</h3><p>Roboflow ajustó las imágenes a 640 × 640 píxeles con relleno para conservar la proporción y aplicó rotaciones como <i>data augmentation</i>. Se verificaron la correspondencia entre imágenes y etiquetas y la validez de las cajas. Para la regresión logística se extrajeron la proporción roja, la proporción verde y la saturación media de los recortes en HSV.</p></article></div>
+<p><a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data">Consultar documentación del dataset ↗</a></p>
+</div></section>
+<section class="wrap section" id="modelos">
+<h2>Estructura de los modelos</h2>
+<div class="grid architectures">
+<article class="panel"><h3>YOLO11s</h3><p>Detector de 9,41 millones de parámetros y 100 capas en el resumen del modelo fusionado. Se entrenó con Frutilla V3 v8.</p>
+<ol class="blocks" aria-label="Diagrama de bloques de YOLO11s"><li>Imagen RGB</li><li>Extracción de características</li><li>Fusión multiescala</li><li>Cabezal de detección</li><li>Cajas, clases y confianza</li></ol></article>
+<article class="panel"><h3>YOLO11n</h3><p>Detector de 2,60 millones de parámetros y 101 capas en el resumen del modelo fusionado. Se entrenó con Frutilla V4 v1 y se utiliza en la aplicación web.</p>
+<ol class="blocks" aria-label="Diagrama de bloques de YOLO11n"><li>Imagen RGB</li><li>Extracción de características</li><li>Fusión multiescala</li><li>Cabezal de detección</li><li>Cajas, clases y confianza</li></ol></article>
+<article class="panel"><h3>Regresión logística multiclase</h3><p>Clasificador lineal con tres variables de entrada y tres salidas. Utiliza nueve coeficientes y tres interceptos, sin capas ocultas.</p>
+<ol class="blocks" aria-label="Diagrama de bloques de la regresión logística"><li>Recorte anotado del fruto</li><li>Extracción de tres variables HSV</li><li>Modelo lineal y softmax</li><li>Clase de madurez</li></ol></article></div>
+</section>
+<section class="demo"><div class="wrap section" id="entrenamiento">
+<h2>Entrenamiento y curvas de aprendizaje</h2>
+<p>Ambos detectores se entrenaron en Google Colab con GPU NVIDIA Tesla T4, imágenes de 640 × 640, lotes de 16, optimizador AdamW, tasa inicial de 0,001 y decaimiento de pesos de 0,0005. Se programaron hasta 100 épocas con una paciencia de 20. YOLO11s completó 38 épocas y obtuvo sus mejores pesos en la 18. YOLO11n completó 61 y obtuvo sus mejores pesos en la 41.</p>
+<p>La búsqueda en grilla de la regresión logística evaluó cuatro valores de regularización y ponderación de clases. La configuración seleccionada usó <code>C=1</code> y <code>class_weight=balanced</code>; el F1 macro en validación pasó de 0,5735 a 0,6767.</p>
+<div class="team">
+<figure class="panel learning"><a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo1/results.png"><img loading="lazy" src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo1/results.png" alt="Curvas de pérdida y métricas por época de YOLO11s"></a><figcaption>YOLO11s · Pérdidas y métricas por época</figcaption></figure>
+<figure class="panel learning"><a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo2/results.png"><img loading="lazy" src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo2/results.png" alt="Curvas de pérdida y métricas por época de YOLO11n"></a><figcaption>YOLO11n · Pérdidas y métricas por época</figcaption></figure></div>
+</div></section>
+<section class="wrap section" id="evaluacion">
+<h2>Evaluación</h2>
+<p>Los detectores se evaluaron con precisión, recall y mAP. La regresión logística se evaluó con exactitud y F1 macro sobre recortes anotados.</p>
+<div class="panel table-scroll"><table><caption>Detección de objetos</caption><thead><tr><th>Detector y conjunto</th><th>Precisión</th><th>Recall</th><th>mAP50</th><th>mAP50–95</th></tr></thead><tbody>
+<tr><th scope="row">YOLO11s · Validación V3</th><td>80,3 %</td><td>79,8 %</td><td>85,5 %</td><td>55,2 %</td></tr>
+<tr><th scope="row">YOLO11n · Validación V4</th><td>87,3 %</td><td>87,0 %</td><td>91,4 %</td><td>78,2 %</td></tr>
+<tr><th scope="row">YOLO11s · Prueba V3</th><td>72,0 %</td><td>79,8 %</td><td>80,8 %</td><td>50,6 %</td></tr>
+<tr><th scope="row">YOLO11n · Evaluación exploratoria en prueba V3</th><td>74,3 %</td><td>79,5 %</td><td>80,0 %</td><td>51,0 %</td></tr>
+</tbody></table></div>
+<p>La regresión logística optimizada alcanzó 85,57 % de exactitud y 67,67 % de F1 macro en validación.</p>
+<p class="note">La prueba V3 contiene 43 imágenes y 187 frutos anotados. Como V4 incorpora datos propios de V3, la evaluación de YOLO11n en esas imágenes es exploratoria y puede incluir muestras relacionadas con su entrenamiento. Las métricas de la partición de prueba de V4 y de la regresión logística se encuentran pendientes.</p>
+<p><a href="assets/precision-recall.png">Consultar la curva precisión–recall de YOLO11n ↗</a> · <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/results">Ver los resultados del repositorio ↗</a></p>
+</section>
+<section class="wrap section" id="analisis">
+<p class="kicker">Implementación · Modelo YOLO11n</p>
+<h2>Análisis de imágenes</h2>
+<p class="intro">Cargue una imagen del cultivo para localizar los frutos visibles y consultar su estado de madurez y la confianza de cada detección.</p>
+<div class="panel analysis-panel">
+<form id="analysis-form">
+<label for="analysis-file">Imagen del cultivo</label>
+<input id="analysis-file" type="file" accept="image/jpeg,image/png,image/webp" required aria-describedby="analysis-note">
+<p id="analysis-note" class="note">JPG, PNG o WebP. La imagen se procesa en el dispositivo. La primera ejecución descarga el modelo.</p>
+<button id="analysis-submit" type="submit">Ejecutar análisis</button>
+</form>
+<p id="analysis-status" role="status"></p>
+<canvas id="analysis-canvas" hidden aria-label="Imagen del cultivo con cajas numeradas para las detecciones"></canvas>
+<div id="analysis-results" hidden>
+<h3>Detecciones por estado de madurez</h3>
+<dl id="analysis-counts" class="metrics analysis-counts"></dl>
+<div class="table-scroll"><table><caption>Detalle de detecciones</caption><thead><tr><th scope="col">Fruto</th><th scope="col">Estado</th><th scope="col">Confianza</th></tr></thead><tbody id="analysis-rows"></tbody></table></div>
+<p class="note">Umbral de confianza de 25 % y supresión de cajas superpuestas con IoU de 0,70.</p>
+</div>
+</div>
+</section>
+<section id="demo" class="demo"><div class="wrap section"><p class="kicker">Demostración interactiva</p><h2>Comparación con el Modelo</h2><p class="intro">Seleccione el estado de madurez de la frutilla marcada. Cada ronda muestra la respuesta seleccionada, la anotación de referencia y la predicción de YOLO11n.</p>
 <div class="game panel"><div id="scene"><img id="fruit" alt="Imagen de cultivo con una frutilla marcada para clasificar"><div id="target" aria-hidden="true"></div></div>
-<div class="game-controls"><p id="round" class="kicker"></p><h3>¿En qué estado está?</h3><div id="choices" class="choices"></div><div id="feedback" aria-live="polite"></div><p id="score" class="score" aria-live="polite"></p><button id="next" hidden>Siguiente frutilla</button></div></div><p class="note">Predicciones precalculadas con los pesos del Modelo 2 sobre imágenes del repositorio. Se usó un umbral de confianza de 0,25 y un IoU mínimo de 0,50 para asociar la detección al fruto marcado. El marcador se calcula contra la anotación del dataset. <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data/modelo1/test">Ver imágenes y etiquetas de origen ↗</a></p></div></section>
-<section class="wrap section" id="equipo"><p class="kicker">Equipo</p><h2>Quiénes somos</h2><div class="team">
+<div class="game-controls"><p id="round" class="kicker"></p><h3>Estado de madurez del fruto marcado</h3><div id="choices" class="choices"></div><div id="feedback" aria-live="polite"></div><p id="score" class="score" aria-live="polite"></p><button id="next" hidden>Siguiente imagen</button></div></div><p class="note">Predicciones precalculadas con los pesos del Modelo sobre imágenes del repositorio. Se usó un umbral de confianza de 0,25 y un IoU mínimo de 0,50 para asociar la detección al fruto marcado. El marcador se calcula contra la anotación del dataset. <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data/modelo1/test">Ver imágenes y etiquetas de origen ↗</a></p></div></section>
+<section class="wrap section" id="equipo"><p class="kicker">Equipo</p><h2>Integrantes</h2><div class="team">
 <article class="panel person"><img src="assets/jose.webp" width="180" height="180" loading="lazy" alt="Retrato de José Jara Acosta"><div><h3>José Fernando Jara Acosta</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://github.com/josejara98">GitHub ↗</a> · <a href="https://www.linkedin.com/in/jose-fernando-jara-acosta-964a36190">LinkedIn ↗</a> · <a href="mailto:josejara@fiuna.edu.py">Correo</a></div></article>
 <article class="panel person"><img src="assets/larissa.webp" width="180" height="180" loading="lazy" alt="Retrato de Larissa Ruiz Almiron"><div><h3>Larissa María Belén Ruiz Almiron</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://github.com/laruizal-star">GitHub ↗</a> · <a href="https://www.linkedin.com/in/larissa-ruiz-536aa2450">LinkedIn ↗</a> · <a href="mailto:laruizal@fiuna.edu.py">Correo</a></div></article></div>
 <div class="team lower"><article><h3>Habilidades aplicadas</h3><ul class="tags"><li>Python</li><li>Visión artificial</li><li>YOLO</li><li>OpenCV</li><li>Pandas</li><li>Scikit-learn</li><li>Grid Search</li><li>Roboflow</li><li>Google Colab</li><li>Git</li></ul></article><article><h3>Educación</h3><p>Ingeniería Mecatrónica · 10.º semestre, 2026<br>Facultad de Ingeniería, Universidad Nacional de Asunción (FIUNA). Formación en curso.</p></article></div></section>

@@ -52,7 +52,7 @@ function showRound() {
 }
 
 function updateScore(count) {
-  elements.score.textContent = 'Tus aciertos ' + playerScore + '/' + count
+  elements.score.textContent = 'Aciertos del participante ' + playerScore + '/' + count
     + ' · Aciertos del modelo ' + modelScore + '/' + count;
 }
 
@@ -68,14 +68,14 @@ function answer(round, choice, selected) {
     : classes[round.prediction] + ' · ' + confidenceFormat.format(round.confidence) + ' de confianza';
   const details = document.createElement('p');
   details.append(
-    'Tu respuesta: ' + classes[choice], document.createElement('br'),
+    'Respuesta seleccionada: ' + classes[choice], document.createElement('br'),
     'Anotación: ' + classes[round.reference], document.createElement('br'),
-    'Modelo 2: ' + prediction
+    'Modelo: ' + prediction
   );
   elements.feedback.replaceChildren(details);
   updateScore(current + 1);
   const last = current === order.length - 1;
-  elements.next.textContent = last ? 'Jugar de nuevo' : 'Siguiente frutilla';
+  elements.next.textContent = last ? 'Reiniciar comparación' : 'Siguiente imagen';
   elements.next.hidden = false;
   elements.next.focus();
 }

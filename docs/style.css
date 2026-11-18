@@ -56,3 +56,26 @@ footer a{color:white;overflow-wrap:anywhere}
 .contact{margin-top:1rem}
 @media(max-width:810px){.hero-grid,.results,.game,.grid,.team{grid-template-columns:1fr}.wrap{width:min(1120px,calc(100% - 2rem))}.top nav{gap:.75rem}.hero-grid{gap:1.4rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.analysis-panel{margin-top:1.5rem}
+#analysis-form label,#analysis-file{display:block}
+#analysis-form label{font-weight:750;margin-bottom:.45rem}
+#analysis-file{max-width:100%;font:inherit;color:var(--ink)}
+#analysis-file::file-selector-button{padding:.5rem .75rem;margin-right:.65rem;border:1px solid var(--line);border-radius:.4rem;background:var(--soft);color:var(--ink);font:inherit;cursor:pointer}
+#analysis-status{color:var(--green);font-weight:700;min-height:1.5em}
+#analysis-canvas{width:auto;max-width:100%;max-height:65vh;object-fit:contain;border-radius:.65rem}
+#analysis-results{margin-top:1.25rem}
+.analysis-counts{grid-template-columns:repeat(3,minmax(0,1fr))}
+.table-scroll{max-height:22rem;overflow:auto}
+table{width:100%;border-collapse:collapse;text-align:left}
+caption{text-align:left;font-weight:700;padding:.5rem 0}
+th,td{padding:.5rem .7rem;border-bottom:1px solid var(--line)}
+th{background:var(--soft)}
+@media(max-width:430px){.analysis-counts{grid-template-columns:1fr}}
+
+.project-title{font-size:clamp(2rem,4vw,3.65rem);line-height:1.09}
+.blocks{list-style:none;margin:1rem 0 0;padding:0}
+.blocks li{position:relative;padding:.4rem .6rem;margin-bottom:1.05rem;background:var(--soft);border:1px solid var(--line);border-radius:.35rem;text-align:center}
+.blocks li:not(:last-child)::after{content:"↓";position:absolute;line-height:1;left:50%;top:calc(100% + 1px);color:var(--green)}
+.blocks li:last-child{margin-bottom:0}
+.learning img{aspect-ratio:auto;object-fit:contain;border-radius:0}
