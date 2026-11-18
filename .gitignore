@@ -1,0 +1,34 @@
+# Entornos virtuales y Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Salidas de entrenamiento y temporales
+runs/
+experimentos_frutillas/
+*.log
+*.tmp
+*.mp4
+*.avi
+
+# Datasets pesados locales (mantener solo data/modelo1/test/ y configs)
+data/modelo1/train/
+data/modelo1/valid/
+data/modelo2/train/
+data/modelo2/valid/
+data/modelo2/test/
+*.zip.part*
+*.7z
+
+# IDEs
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['maduro', 'no-maduro', 'semi-maduro']
+
+roboflow:
+  workspace: larissas-workspace-3bnvn
+  project: frutilla_v3
+  version: 8
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/larissas-workspace-3bnvn/frutilla_v3/dataset/8
