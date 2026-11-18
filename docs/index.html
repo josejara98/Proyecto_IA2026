@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Proyecto de Inteligencia Artificial de FIUNA. Detectá frutillas y compará tus respuestas con YOLO11n.">
+<title>Frutillas en campo · IA 2026</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="rondas.js"></script>
+<script defer src="juego.js"></script>
+</head>
+<body>
+<header class="wrap top"><a class="brand" href="#">Frutillas en campo</a><nav aria-label="Principal"><a href="#proyecto">Proyecto</a><a href="#demo">Minijuego</a><a href="#equipo">Equipo</a><a href="#contacto">Contacto</a></nav></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><p class="kicker">FIUNA / Inteligencia Artificial 2026</p><h1>Detectar frutillas.<br>Reconocer su madurez.</h1>
+<p class="intro">Somos José Jara y Larissa Ruiz, estudiantes de Ingeniería Mecatrónica. Aplicamos visión artificial a un robot móvil para monitorear el cultivo de frutillas.</p>
+<div class="actions"><a class="button" href="#demo">Probar el minijuego</a><a class="button outline" href="https://github.com/josejara98/Proyecto_IA2026">Ver repositorio ↗</a></div></div>
+<figure><img src="assets/campo.jpg" alt="Frutillas en una imagen real del cultivo" width="720" height="540"><figcaption>Imagen del dataset de campo</figcaption></figure></div></section>
+<section class="wrap section" id="proyecto"><p class="kicker">Proyecto de Inteligencia Artificial</p><h2>Visión artificial para monitorear el cultivo</h2><p class="intro">El sistema localiza frutillas en imágenes tomadas desde la perspectiva del robot y reconoce tres estados de madurez. Esto permite registrar cómo se distribuyen los frutos visibles durante un recorrido.</p>
+<div class="grid"><article class="panel"><h3>Dataset</h3><p>Frutilla V4 v1 reúne 7.927 imágenes RGB propias y de fuentes externas. Las anotaciones indican la ubicación y el estado de cada fruto. La exportación de Roboflow usa imágenes de 640 × 640 píxeles con relleno para conservar la proporción.</p><a href="https://universe.roboflow.com/larissas-workspace-3bnvn/frutilla_v4-r9rhk/dataset/1">Ver dataset en Roboflow ↗</a></article>
+<article class="panel"><h3>Modelo 2 · YOLO11n</h3><p>El detector devuelve una caja, una clase y una confianza por fruto. Se entrenó con AdamW, tasa inicial de 0,001, lotes de 16 y detención temprana. El mejor checkpoint se obtuvo en la época 41.</p><a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/models">Ver pesos y configuración ↗</a></article>
+<article class="panel"><h3>Características y optimización</h3><p>Para el clasificador auxiliar se extrajeron tres características HSV de cada recorte: proporción roja, proporción verde y saturación media. La búsqueda en grilla evaluó la regularización y el balanceo de clases en la regresión logística.</p><a href="https://github.com/josejara98/Proyecto_IA2026/blob/main/notebooks/03_optimizacion.ipynb">Ver optimización ↗</a></article></div>
+<div class="results"><div><h3>Resultados del Modelo 2</h3><p>Métricas globales sobre la partición de validación de Frutilla V4 v1.</p><dl class="metrics"><div><dt>mAP50</dt><dd>91,4 %</dd></div><div><dt>mAP50–95</dt><dd>78,2 %</dd></div><div><dt>Precisión</dt><dd>87,3 %</dd></div><div><dt>Recall</dt><dd>87,0 %</dd></div></dl><a href="https://github.com/josejara98/Proyecto_IA2026/blob/main/results/metricas.csv">Consultar resultados completos ↗</a></div><a class="chart" href="assets/precision-recall.png"><img src="assets/precision-recall.png" loading="lazy" alt="Curva precisión–recall del Modelo 2 por clase. La AP50 de maduro es 0,906, de no maduro 0,927 y de semimaduro 0,910."></a></div>
+</section>
+<section id="demo" class="demo"><div class="wrap section"><p class="kicker">Demostración interactiva</p><h2>Tu criterio frente al Modelo 2</h2><p class="intro">Observá la frutilla marcada y elegí su estado. Luego verás tu respuesta, la anotación del dataset y lo que detectó YOLO11n en la imagen completa.</p>
+<div class="game panel"><div id="scene"><img id="fruit" alt="Imagen de cultivo con una frutilla marcada para clasificar"><div id="target" aria-hidden="true"></div></div>
+<div class="game-controls"><p id="round" class="kicker"></p><h3>¿En qué estado está?</h3><div id="choices" class="choices"></div><div id="feedback" aria-live="polite"></div><p id="score" class="score" aria-live="polite"></p><button id="next" hidden>Siguiente frutilla</button></div></div><p class="note">Predicciones precalculadas con los pesos del Modelo 2 sobre imágenes del repositorio. Se usó un umbral de confianza de 0,25 y un IoU mínimo de 0,50 para asociar la detección al fruto marcado. El marcador se calcula contra la anotación del dataset. <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data/modelo1/test">Ver imágenes y etiquetas de origen ↗</a></p></div></section>
+<section class="wrap section" id="equipo"><p class="kicker">Equipo</p><h2>Quiénes somos</h2><div class="team">
+<article class="panel person"><img src="assets/jose.webp" width="180" height="180" loading="lazy" alt="Retrato de José Jara Acosta"><div><h3>José Fernando Jara Acosta</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://github.com/josejara98">GitHub ↗</a> · <a href="mailto:josejara@fiuna.edu.py">Correo</a></div></article>
+<article class="panel person"><img src="assets/larissa.webp" width="180" height="180" loading="lazy" alt="Retrato de Larissa Ruiz Almiron"><div><h3>Larissa María Belén Ruiz Almiron</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://www.linkedin.com/in/larissa-ruiz-536aa2450">LinkedIn ↗</a> · <a href="mailto:laruizal@fiuna.edu.py">Correo</a></div></article></div>
+<div class="team lower"><article><h3>Habilidades aplicadas</h3><ul class="tags"><li>Python</li><li>Visión artificial</li><li>YOLO</li><li>OpenCV</li><li>Pandas</li><li>Scikit-learn</li><li>Grid Search</li><li>Roboflow</li><li>Google Colab</li><li>Git</li></ul></article><article><h3>Educación</h3><p>Ingeniería Mecatrónica · 10.º semestre, 2026<br>Facultad de Ingeniería, Universidad Nacional de Asunción (FIUNA). Formación en curso.</p></article></div></section>
+</main>
+<footer id="contacto"><div class="wrap"><h2>Contacto</h2><div class="contact"><a href="mailto:josejara@fiuna.edu.py">josejara@fiuna.edu.py</a><a href="mailto:laruizal@fiuna.edu.py">laruizal@fiuna.edu.py</a><a href="https://github.com/josejara98/Proyecto_IA2026">Repositorio en GitHub ↗</a></div></div></footer>
+</body>
+</html>
