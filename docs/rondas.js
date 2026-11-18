@@ -39,17 +39,17 @@ const rondas = [
     "confidence": 0.831
   },
   {
-    "image": "ronda-4.jpg",
-    "source": "data/modelo1/test/images/1000450915_frame_057_jpg.rf.1bb32cb10125e731329d2fc1dcd77f32.jpg",
+    "image": "ronda-4-reemplazo.jpg",
+    "source": "data/modelo1/test/images/04_Cargado_mp4-0066_jpg.rf.9a3267b44e00b4cbb733ef7411f2797e.jpg",
     "box": [
-      0.257031,
-      0.65,
-      0.314844,
-      0.709375
+      0.792969,
+      0.453906,
+      0.841406,
+      0.496094
     ],
     "reference": 0,
-    "prediction": null,
-    "confidence": null
+    "prediction": 0,
+    "confidence": 0.701
   },
   {
     "image": "ronda-5.jpg",

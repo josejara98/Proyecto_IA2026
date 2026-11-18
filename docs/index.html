@@ -20,9 +20,9 @@
 <figure><img src="assets/campo.jpg" alt="Frutillas en una imagen real del cultivo" width="720" height="540"><figcaption>Imagen del dataset de campo</figcaption></figure></div></section>
 <section class="wrap section" id="proyecto">
 <p class="kicker">Proyecto de Inteligencia Artificial</p>
-<h2>Objetivos y alcance</h2>
-<p class="intro">El objetivo es desarrollar y evaluar un sistema que localice frutillas visibles en imágenes de campo y clasifique su estado de madurez. La detección permite obtener un conteo por estado en cada imagen como parte del monitoreo del cultivo con un robot móvil.</p>
-<ul><li>Preparar y auditar imágenes RGB con cajas delimitadoras en formato YOLO.</li><li>Evaluar dos detectores de objetos y un clasificador de referencia basado en color.</li><li>Implementar el detector YOLO11n en una aplicación web que procese imágenes del cultivo.</li></ul>
+<h2>Descripción del proyecto</h2>
+<p class="intro">El sistema localiza frutillas visibles en imágenes de campo, clasifica su estado de madurez y genera un conteo por clase en cada imagen. Forma parte de un proyecto de monitoreo del cultivo con un robot móvil.</p>
+
 </section>
 <section class="demo"><div class="wrap section" id="dataset">
 <h2>Estructura del dataset</h2>
@@ -89,7 +89,12 @@
 </section>
 <section id="demo" class="demo"><div class="wrap section"><p class="kicker">Demostración interactiva</p><h2>Comparación con el Modelo</h2><p class="intro">Seleccione el estado de madurez de la frutilla marcada. Cada ronda muestra la respuesta seleccionada, la anotación de referencia y la predicción de YOLO11n.</p>
 <div class="game panel"><div id="scene"><img id="fruit" alt="Imagen de cultivo con una frutilla marcada para clasificar"><div id="target" aria-hidden="true"></div></div>
-<div class="game-controls"><p id="round" class="kicker"></p><h3>Estado de madurez del fruto marcado</h3><div id="choices" class="choices"></div><div id="feedback" aria-live="polite"></div><p id="score" class="score" aria-live="polite"></p><button id="next" hidden>Siguiente imagen</button></div></div><p class="note">Predicciones precalculadas con los pesos del Modelo sobre imágenes del repositorio. Se usó un umbral de confianza de 0,25 y un IoU mínimo de 0,50 para asociar la detección al fruto marcado. El marcador se calcula contra la anotación del dataset. <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data/modelo1/test">Ver imágenes y etiquetas de origen ↗</a></p></div></section>
+<div class="game-controls"><p id="round" class="kicker"></p><h3 id="game-question">Estado de madurez del fruto marcado</h3><div id="choices" class="choices"></div><div id="feedback" aria-live="polite"></div><p id="score" class="score" aria-live="polite"></p><button id="next" hidden>Siguiente imagen</button>
+<section id="game-summary" hidden aria-labelledby="game-summary-title">
+<h3 id="game-summary-title" tabindex="-1">Resultados finales</h3>
+<dl class="metrics"><div><dt>Participante</dt><dd id="game-player-total"></dd></div><div><dt>Modelo</dt><dd id="game-model-total"></dd></div></dl>
+<button id="game-restart" type="button">Intentar de nuevo</button>
+</section></div></div><p class="note">Predicciones precalculadas con los pesos del Modelo sobre imágenes del repositorio. Se usó un umbral de confianza de 0,25 y un IoU mínimo de 0,50 para asociar la detección al fruto marcado. El marcador se calcula contra la anotación del dataset. <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/data/modelo1/test">Ver imágenes y etiquetas de origen ↗</a></p></div></section>
 <section class="wrap section" id="equipo"><p class="kicker">Equipo</p><h2>Integrantes</h2><div class="team">
 <article class="panel person"><img src="assets/jose.webp" width="180" height="180" loading="lazy" alt="Retrato de José Jara Acosta"><div><h3>José Fernando Jara Acosta</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://github.com/josejara98">GitHub ↗</a> · <a href="https://www.linkedin.com/in/jose-fernando-jara-acosta-964a36190">LinkedIn ↗</a> · <a href="mailto:josejara@fiuna.edu.py">Correo</a></div></article>
 <article class="panel person"><img src="assets/larissa.webp" width="180" height="180" loading="lazy" alt="Retrato de Larissa Ruiz Almiron"><div><h3>Larissa María Belén Ruiz Almiron</h3><p>Estudiante de Ingeniería Mecatrónica</p><a href="https://github.com/laruizal-star">GitHub ↗</a> · <a href="https://www.linkedin.com/in/larissa-ruiz-536aa2450">LinkedIn ↗</a> · <a href="mailto:laruizal@fiuna.edu.py">Correo</a></div></article></div>

@@ -2,7 +2,8 @@
 
 const classes = ['Maduro', 'No maduro', 'Semimaduro'];
 const elements = Object.fromEntries(
-  ['scene', 'fruit', 'target', 'round', 'choices', 'feedback', 'score', 'next']
+  ['scene', 'fruit', 'target', 'round', 'choices', 'feedback', 'score', 'next', 'game-question', 'game-summary',
+    'game-summary-title', 'game-player-total', 'game-model-total', 'game-restart']
     .map(id => [id, document.getElementById(id)])
 );
 const confidenceFormat = new Intl.NumberFormat('es-PY', {
@@ -21,6 +22,10 @@ function reset() {
     const other = Math.floor(Math.random() * (index + 1));
     [order[index], order[other]] = [order[other], order[index]];
   }
+  elements['game-summary'].hidden = true;
+  elements['game-question'].hidden = false;
+  elements.choices.hidden = false;
+  elements.score.hidden = false;
   current = 0;
   playerScore = 0;
   modelScore = 0;
@@ -74,15 +79,27 @@ function answer(round, choice, selected) {
   );
   elements.feedback.replaceChildren(details);
   updateScore(current + 1);
-  const last = current === order.length - 1;
-  elements.next.textContent = last ? 'Reiniciar comparación' : 'Siguiente imagen';
+  if (current === order.length - 1) {
+    elements.round.textContent = 'Comparación finalizada';
+    elements['game-question'].hidden = elements.choices.hidden = elements.score.hidden = true;
+    elements['game-player-total'].textContent = playerScore + '/' + order.length;
+    elements['game-model-total'].textContent = modelScore + '/' + order.length;
+    elements['game-summary'].hidden = false;
+    elements['game-summary-title'].focus();
+    return;
+  }
   elements.next.hidden = false;
   elements.next.focus();
 }
 
 elements.next.addEventListener('click', () => {
   current++;
-  if (current === order.length) reset();
+  showRound();
+  elements.choices.firstElementChild.focus();
+});
+
+elements['game-restart'].addEventListener('click', () => {
+  reset();
   showRound();
   elements.choices.firstElementChild.focus();
 });
