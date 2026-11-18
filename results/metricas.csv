@@ -1,0 +1,17 @@
+tarea,modelo,dataset,particion,clase,precision,recall,f1_score,mAP50,mAP50_95,notas
+Deteccion_YOLO,YOLO11s,frutilla_v3_v8,valid,all,0.8030,0.7980,0.8005,0.8550,0.5520,Entrenamiento 38 epocas (best en ep. 18). Solo datos propios.
+Deteccion_YOLO,YOLO11s,frutilla_v3_v8,valid,maduro,0.7230,0.9240,0.8112,0.8800,0.5960,105 imagenes con 158 instancias
+Deteccion_YOLO,YOLO11s,frutilla_v3_v8,valid,no-maduro,0.8550,0.7360,0.7911,0.8690,0.5140,179 imagenes con 615 instancias
+Deteccion_YOLO,YOLO11s,frutilla_v3_v8,valid,semi-maduro,0.8320,0.7330,0.7794,0.8170,0.5460,98 imagenes con 149 instancias
+Deteccion_YOLO,YOLO11n,frutilla_v4_v1,valid,all,0.8730,0.8700,0.8715,0.9140,0.7820,Entrenamiento 61 epocas (best en ep. 41). Propios + externos.
+Deteccion_YOLO,YOLO11n,frutilla_v4_v1,valid,maduro,0.8090,0.9090,0.8561,0.9060,0.8050,501 imagenes con 679 instancias
+Deteccion_YOLO,YOLO11n,frutilla_v4_v1,valid,no-maduro,0.9280,0.8650,0.8954,0.9270,0.7180,971 imagenes con 4048 instancias
+Deteccion_YOLO,YOLO11n,frutilla_v4_v1,valid,semi-maduro,0.8820,0.8360,0.8584,0.9100,0.8230,678 imagenes con 978 instancias
+Clasificacion_Recortes_HSV,RegresionLogistica_Base,frutilla_v3_v8,valid,all,0.5291,0.6260,0.5735,NA,NA,C=1.0; class_weight=None; Accuracy=0.8167; Macro F1
+Clasificacion_Recortes_HSV,RegresionLogistica_Base,frutilla_v3_v8,valid,maduro,0.7554,0.8797,0.8129,NA,NA,158 recortes anotados
+Clasificacion_Recortes_HSV,RegresionLogistica_Base,frutilla_v3_v8,valid,no-maduro,0.8320,0.9984,0.9076,NA,NA,615 recortes anotados
+Clasificacion_Recortes_HSV,RegresionLogistica_Base,frutilla_v3_v8,valid,semi-maduro,0.0000,0.0000,0.0000,NA,NA,149 recortes anotados (clase minoritaria no predicha)
+Clasificacion_Recortes_HSV,RegresionLogistica_Optimizada,frutilla_v3_v8,valid,all,0.8159,0.7070,0.6767,NA,NA,C=1.0; class_weight=balanced; Accuracy=0.8557; Macro F1
+Clasificacion_Recortes_HSV,RegresionLogistica_Optimizada,frutilla_v3_v8,valid,maduro,0.7600,0.7803,0.7700,NA,NA,158 recortes anotados
+Clasificacion_Recortes_HSV,RegresionLogistica_Optimizada,frutilla_v3_v8,valid,no-maduro,0.9328,0.9890,0.9601,NA,NA,615 recortes anotados
+Clasificacion_Recortes_HSV,RegresionLogistica_Optimizada,frutilla_v3_v8,valid,semi-maduro,0.7550,0.1919,0.3000,NA,NA,149 recortes anotados (frecuencia rescatada por balanceo)
