@@ -67,10 +67,11 @@ footer a{color:white;overflow-wrap:anywhere}
 #analysis-results{margin-top:1.25rem}
 .analysis-counts{grid-template-columns:repeat(3,minmax(0,1fr))}
 .table-scroll{max-height:22rem;overflow:auto}
-table{width:100%;border-collapse:collapse;text-align:left}
-caption{text-align:left;font-weight:700;padding:.5rem 0}
-th,td{padding:.5rem .7rem;border-bottom:1px solid var(--line)}
-th{background:var(--soft)}
+table{width:100%;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-weight:700;padding:0 0 .55rem}
+th,td{padding:.55rem .75rem;border:1px solid #cdd9cf}
+thead th{background:var(--soft)}
+tbody th,tbody td{background:white}
 @media(max-width:430px){.analysis-counts{grid-template-columns:1fr}}
 
 .project-title{font-size:clamp(1.6rem,3vw,2.65rem);line-height:1.15}
@@ -78,14 +79,16 @@ th{background:var(--soft)}
 .blocks li{position:relative;padding:.4rem .6rem;margin-bottom:1.05rem;background:var(--soft);border:1px solid var(--line);border-radius:.35rem;text-align:center}
 .blocks li:not(:last-child)::after{content:"↓";position:absolute;line-height:1;left:50%;top:calc(100% + 1px);color:var(--green)}
 .blocks li:last-child{margin-bottom:0}
-.learning img{aspect-ratio:auto;object-fit:contain;border-radius:0}
 
 .choices[hidden]{display:none}
 #game-summary{margin-top:1.25rem}
 
-.cover-slides{overflow:hidden;border-radius:.85rem;background:var(--ink)}
-.cover-slides img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}
-.cover-slides img[hidden],.cover-controls[hidden]{display:none}
-.cover-controls{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.65rem}
-.cover-controls button{padding:.28rem .65rem;background:var(--paper);color:var(--green);font-size:.9rem}
-.cover-controls output{font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.cover-slides{overflow:hidden;border-radius:1rem;background:#e1e9dd}
+.cover-slides img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}
+.cover-slides img[hidden]{display:none}
+
+.table-scroll{margin-block:1rem}
+#dataset td,#dataset th:not(:first-child),#evaluacion td:nth-child(n+3),#evaluacion th:nth-child(n+3){text-align:right;white-space:nowrap}
+#analysis-results td:last-child,#analysis-results th:last-child{text-align:right;white-space:nowrap}
+.metric-figure{max-width:760px;margin:1.25rem 0}
+.metric-figure img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:0}

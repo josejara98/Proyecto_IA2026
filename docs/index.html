@@ -24,12 +24,6 @@
 <img src="assets/portada-detecciones-2.webp" alt="Imagen 2 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="640" hidden>
 <img src="assets/portada-detecciones-3.webp" alt="Imagen 3 de 3. Frutillas delimitadas por cajas de detección, con clase y confianza." width="640" height="640" hidden>
 </div>
-<div class="cover-controls" hidden>
-<button type="button" id="cover-prev" aria-label="Imagen anterior">←</button>
-<output id="cover-position" aria-live="off">1 / 3</output>
-<button type="button" id="cover-next" aria-label="Imagen siguiente">→</button>
-<button type="button" id="cover-play">Pausar</button>
-</div>
 </section></div></section>
 <section class="wrap section" id="proyecto">
 <p class="kicker">Proyecto de Inteligencia Artificial</p>
@@ -40,7 +34,7 @@
 <section class="demo"><div class="wrap section" id="dataset">
 <h2>Estructura del dataset</h2>
 <p>Frutilla V3 v8 contiene fotografías y fotogramas propios. Frutilla V4 v1 combina material propio e imágenes externas de repositorios abiertos. Las etiquetas se homologaron a tres estados: maduro, no maduro y semimaduro.</p>
-<div class="panel table-scroll"><table><caption>Imágenes por partición</caption><thead><tr><th>Dataset</th><th>Entrenamiento</th><th>Validación</th><th>Prueba</th><th>Total</th></tr></thead><tbody>
+<div class="table-scroll"><table><caption>Imágenes por partición</caption><thead><tr><th>Dataset</th><th>Entrenamiento</th><th>Validación</th><th>Prueba</th><th>Total</th></tr></thead><tbody>
 <tr><th scope="row">Frutilla V3 v8</th><td>1.500</td><td>215</td><td>43</td><td>1.758</td></tr>
 <tr><th scope="row">Frutilla V4 v1</th><td>6.769</td><td>1.042</td><td>116</td><td>7.927</td></tr>
 </tbody></table></div>
@@ -62,22 +56,27 @@
 <h2>Entrenamiento y curvas de aprendizaje</h2>
 <p>Ambos detectores se entrenaron en Google Colab con GPU NVIDIA Tesla T4, imágenes de 640 × 640, lotes de 16, optimizador AdamW, tasa inicial de 0,001 y decaimiento de pesos de 0,0005. Se programaron hasta 100 épocas con una paciencia de 20. YOLO11s completó 38 épocas y obtuvo sus mejores pesos en la 18. YOLO11n completó 61 y obtuvo sus mejores pesos en la 41.</p>
 <p>La búsqueda en grilla de la regresión logística evaluó cuatro valores de regularización y ponderación de clases. La configuración seleccionada usó <code>C=1</code> y <code>class_weight=balanced</code>; el F1 macro en validación pasó de 0,5735 a 0,6767.</p>
-<div class="team">
-<figure class="panel learning"><a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo1/results.png"><img loading="lazy" src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo1/results.png" alt="Curvas de pérdida y métricas por época de YOLO11s"></a><figcaption>YOLO11s · Pérdidas y métricas por época</figcaption></figure>
-<figure class="panel learning"><a href="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo2/results.png"><img loading="lazy" src="https://raw.githubusercontent.com/josejara98/Proyecto_IA2026/main/results/plots/modelo2/results.png" alt="Curvas de pérdida y métricas por época de YOLO11n"></a><figcaption>YOLO11n · Pérdidas y métricas por época</figcaption></figure></div>
+<figure class="panel metric-figure">
+<img loading="lazy" src="assets/curvas-aprendizaje.svg" alt="Evolución de mAP50–95 por época para YOLO11s y YOLO11n.">
+<figcaption>mAP50–95 por época. Cada detector se evaluó con su propio conjunto de validación.</figcaption>
+</figure>
 </div></section>
 <section class="wrap section" id="evaluacion">
 <h2>Evaluación</h2>
 <p>Los detectores se evaluaron con precisión, recall y mAP. La regresión logística se evaluó con exactitud y F1 macro sobre recortes anotados.</p>
-<div class="panel table-scroll"><table><caption>Detección de objetos</caption><thead><tr><th>Detector y conjunto</th><th>Precisión</th><th>Recall</th><th>mAP50</th><th>mAP50–95</th></tr></thead><tbody>
-<tr><th scope="row">YOLO11s · Validación V3</th><td>80,3 %</td><td>79,8 %</td><td>85,5 %</td><td>55,2 %</td></tr>
-<tr><th scope="row">YOLO11n · Validación V4</th><td>87,3 %</td><td>87,0 %</td><td>91,4 %</td><td>78,2 %</td></tr>
-<tr><th scope="row">YOLO11s · Prueba V3</th><td>72,0 %</td><td>79,8 %</td><td>80,8 %</td><td>50,6 %</td></tr>
-<tr><th scope="row">YOLO11n · Evaluación exploratoria en prueba V3</th><td>74,3 %</td><td>79,5 %</td><td>80,0 %</td><td>51,0 %</td></tr>
+<figure class="panel metric-figure">
+<img loading="lazy" src="assets/metricas-yolo11n.svg" alt="YOLO11n en validación V4: precisión 87,3 %, recall 87,0 %, mAP50 91,4 % y mAP50–95 78,2 %.">
+<figcaption>Métricas principales de YOLO11n en validación V4.</figcaption>
+</figure>
+<div class="table-scroll"><table><caption>Detección de objetos</caption><thead><tr><th>Detector</th><th>Conjunto</th><th>Precisión</th><th>Recall</th><th>mAP50</th><th>mAP50–95</th></tr></thead><tbody>
+<tr><th scope="row">YOLO11s</th><td>Validación V3</td><td>80,3 %</td><td>79,8 %</td><td>85,5 %</td><td>55,2 %</td></tr>
+<tr><th scope="row">YOLO11n</th><td>Validación V4</td><td>87,3 %</td><td>87,0 %</td><td>91,4 %</td><td>78,2 %</td></tr>
+<tr><th scope="row">YOLO11s</th><td>Prueba V3</td><td>72,0 %</td><td>79,8 %</td><td>80,8 %</td><td>50,6 %</td></tr>
+<tr><th scope="row">YOLO11n</th><td>Prueba V3 (exploratoria)</td><td>74,3 %</td><td>79,5 %</td><td>80,0 %</td><td>51,0 %</td></tr>
 </tbody></table></div>
 <p>La regresión logística optimizada alcanzó 85,57 % de exactitud y 67,67 % de F1 macro en validación.</p>
 <p class="note">La prueba V3 contiene 43 imágenes y 187 frutos anotados. Como V4 incorpora datos propios de V3, la evaluación de YOLO11n en esas imágenes es exploratoria y puede incluir muestras relacionadas con su entrenamiento. Las métricas de la partición de prueba de V4 y de la regresión logística se encuentran pendientes.</p>
-<p><a href="assets/precision-recall.png">Consultar la curva precisión–recall de YOLO11n ↗</a> · <a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/results">Ver los resultados del repositorio ↗</a></p>
+<p><a href="https://github.com/josejara98/Proyecto_IA2026/tree/main/results">Ver los resultados del repositorio ↗</a></p>
 </section>
 <section class="wrap section" id="analisis">
 <p class="kicker">Implementación · Modelo YOLO11n</p>
